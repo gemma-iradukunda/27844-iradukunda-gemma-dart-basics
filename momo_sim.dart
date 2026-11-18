@@ -1,10 +1,9 @@
 ﻿// Student: Iradukunda Gemma
 // Reg no: 27844
 const String regNo = '27844';
-final int  = int.parse(regNo[regNo.length - 1]);
-final int  = int.parse(regNo.substring(regNo.length - 2));
+final int d = int.parse(regNo[regNo.length - 1]);
+final int t = int.parse(regNo.substring(regNo.length - 2));
 
-// by IG
 int momoFee(int amount) {
   // by IG
   if (amount <= 0) return -1;
@@ -14,7 +13,6 @@ int momoFee(int amount) {
   return 1500;
 }
 
-// by IG
 String formatRwf(int amount) {
   // by IG
   String sign = '';
@@ -37,13 +35,11 @@ String formatRwf(int amount) {
   return sign + result + ' RWF';
 }
 
-// by IG
 bool isValidPin(String pin) {
   // by IG
   if (pin.length != 5) return false;
   if (pin == '12345') return false;
-  
-  // check if all characters are digits and if all same digit
+
   bool allDigits = true;
   bool allSame = true;
   int i = 0;
@@ -60,7 +56,6 @@ bool isValidPin(String pin) {
   return true;
 }
 
-// by IG
 int sendMoney(int balance, int amount) {
   // by IG
   int fee = momoFee(amount);
@@ -73,11 +68,10 @@ int sendMoney(int balance, int amount) {
     return balance;
   }
   int newBalance = balance - (amount + fee);
-  print('Sent  (fee ). New balance: ');
+  print('Sent ${formatRwf(amount)} (fee ${formatRwf(fee)}). New balance: ${formatRwf(newBalance)}');
   return newBalance;
 }
 
-// by IG
 int buyAirtime(int balance, int amount) {
   // by IG
   if (amount < 100 || amount > 50000 || amount > balance) {
@@ -85,26 +79,26 @@ int buyAirtime(int balance, int amount) {
     return balance;
   }
   int newBalance = balance - amount;
-  print('Bought airtime . New balance: ');
+  print('Bought airtime ${formatRwf(amount)}. New balance: ${formatRwf(newBalance)}');
   return newBalance;
 }
 
 void main() {
-  print('Reg no: \ | D=\ | T=\');
+  print('Reg no: $regNo | D=$d | T=$t');
 
   // Part F main requirement 1
   print(isValidPin('12345'));
   print(isValidPin('77777'));
-  print(isValidPin('4821\'));
+  print(isValidPin('4821'));
   print(isValidPin('48a21'));
-  print(isValidPin('4821D'));
+  print(isValidPin('48214'));
 
   // Part F main requirement 2
-  int balance = 20000 + \ * 500;
-  print('Starting balance: ');
+  int balance = 20000 + t * 500;
+  print('Starting balance: ${formatRwf(balance)}');
 
   // Part F main requirement 3
-  int sendAmount = (\ + 1) * 3000;
+  int sendAmount = (d + 1) * 3000;
   int c = 0;
   while (c < 3) {
     balance = sendMoney(balance, sendAmount);
@@ -115,14 +109,13 @@ void main() {
   balance = sendMoney(balance, 200000);
 
   // Part F main requirement 4
-  print('Final balance: ');
+  print('Final balance: ${formatRwf(balance)}');
 
-  // Part F main requirement 5: Test calls with comments
-  // formatRwf tests
-  // print(formatRwf(999999)); // Expected: 999,999 RWF
-  // print(formatRwf(1000));   // Expected: 1,000 RWF
-  // print(formatRwf(-5000));  // Expected: -5,000 RWF
-  // isValidPin tests
-  // print(isValidPin('48219')); // Expected: true
-  // print(isValidPin('1234'));  // Expected: false (wrong length)
+  // Part F main requirement 5: 5+ custom test calls with expected output comments
+  print(formatRwf(0));       // 0 RWF
+  print(formatRwf(1250000)); // 1,250,000 RWF
+  print(formatRwf(-5000));   // -5,000 RWF
+  print(isValidPin('48219')); // true
+  print(isValidPin('00000')); // false (all same digit)
+  print(isValidPin('12 45')); // false (contains space)
 }
