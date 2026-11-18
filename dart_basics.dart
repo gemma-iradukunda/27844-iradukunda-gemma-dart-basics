@@ -1,10 +1,9 @@
 ﻿// Student: Iradukunda Gemma
 // Reg no: 27844
 const String regNo = '27844';
-final int  = int.parse(regNo[regNo.length - 1]);
-final int  = int.parse(regNo.substring(regNo.length - 2));
+final int d = int.parse(regNo[regNo.length - 1]);
+final int t = int.parse(regNo.substring(regNo.length - 2));
 
-// by IG
 int countVowels(String text) {
   // by IG
   int count = 0;
@@ -19,7 +18,6 @@ int countVowels(String text) {
   return count;
 }
 
-// by IG
 String initials(String fullName) {
   // by IG
   fullName = fullName.trim();
@@ -29,14 +27,13 @@ String initials(String fullName) {
   int i = 0;
   while (i < parts.length) {
     if (parts[i].isNotEmpty) {
-      result += '.';
+      result += '${parts[i][0].toUpperCase()}.';
     }
     i++;
   }
   return result;
 }
 
-// by IG
 void drawTriangle(int height) {
   // by IG
   if (height <= 0) return;
@@ -57,12 +54,11 @@ void drawTriangle(int height) {
       symbols += char;
       c++;
     }
-    print('');
+    print('$spaces$symbols');
     i++;
   }
 }
 
-// by IG
 int momoFee(int amount) {
   // by IG
   if (amount <= 0) return -1;
@@ -72,7 +68,6 @@ int momoFee(int amount) {
   return 1500;
 }
 
-// by IG
 String maskPhone(String phone) {
   // by IG
   if (phone.length != 10) return 'INVALID';
@@ -80,11 +75,11 @@ String maskPhone(String phone) {
 }
 
 void main() {
-  print('Reg no: \ | D=\ | T=\');
+  print('Reg no: $regNo | D=$d | T=$t');
 
   // B2 test
   String myName = 'Iradukunda Gemma';
-  print(' has \ vowels');
+  print('$myName has ${countVowels(myName)} vowels');
 
   // B3 test
   print(initials('Iradukunda Gemma'));
@@ -92,20 +87,20 @@ void main() {
   print(initials('   '));
 
   // C5 test (height = D + 3 = 7)
-  drawTriangle( + 3);
+  drawTriangle(d + 3);
   drawTriangle(0);
   drawTriangle(2);
 
   // D2 MoMo receipt loop
   int i = 1;
   int totalFees = 0;
-  while (i <=  + 3) {
-    int amount = i * 4000 +  * 100;
+  while (i <= d + 3) {
+    int amount = i * 4000 + t * 100;
     int fee = momoFee(amount);
     totalFees += fee;
     String phone = maskPhone('0788123456');
-    print('Receipt   RWF | fee  RWF | to ');
+    print('Receipt $i $amount RWF | fee $fee RWF | to $phone');
     i++;
   }
-  print('Total fees:  RWF.');
+  print('Total fees: $totalFees RWF.');
 }
